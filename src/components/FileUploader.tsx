@@ -102,8 +102,8 @@ export const FileUploader = ({ onDataLoaded }: FileUploaderProps) => {
 
   return (
     <Card
-      className={`p-8 border-2 border-dashed transition-all duration-300 ${
-        isDragging ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"
+      className={`p-12 border-2 border-dashed transition-all duration-300 shadow-elegant hover:shadow-glow ${
+        isDragging ? "border-primary bg-primary/5 scale-[1.02]" : "border-border hover:border-primary/50"
       }`}
       onDragOver={(e) => {
         e.preventDefault();
@@ -112,18 +112,18 @@ export const FileUploader = ({ onDataLoaded }: FileUploaderProps) => {
       onDragLeave={() => setIsDragging(false)}
       onDrop={handleDrop}
     >
-      <div className="flex flex-col items-center justify-center gap-4">
-        <div className="rounded-full bg-primary/10 p-4">
-          <Upload className="h-8 w-8 text-primary" />
+      <div className="flex flex-col items-center justify-center gap-6">
+        <div className="rounded-full bg-gradient-to-br from-primary/20 to-primary-glow/20 p-6 shadow-glow">
+          <Upload className="h-12 w-12 text-primary" />
         </div>
         <div className="text-center">
-          <h3 className="text-lg font-semibold mb-1">Upload your data file</h3>
+          <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Upload your data file</h3>
           <p className="text-sm text-muted-foreground mb-4">
             Drag and drop or click to browse for CSV or XLSX files
           </p>
         </div>
         <label htmlFor="file-upload">
-          <Button disabled={isLoading} asChild>
+          <Button disabled={isLoading} asChild size="lg">
             <span className="cursor-pointer">
               {isLoading ? "Processing..." : "Choose File"}
             </span>

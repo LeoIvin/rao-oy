@@ -5,6 +5,7 @@ import { FileUploader } from "@/components/FileUploader";
 import { ProfitabilityTab } from "@/components/ProfitabilityTab";
 import { ExpiryAlertsTab } from "@/components/ExpiryAlertsTab";
 import { ForecastTab } from "@/components/ForecastTab";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { DataRow } from "@/types/data";
 
 const Index = () => {
@@ -12,18 +13,23 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
+      <header className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-lg supports-[backdrop-filter]:bg-card/60">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-primary/10 p-2">
-              <BarChart3 className="h-6 w-6 text-primary" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-gradient-to-br from-primary to-primary-glow p-2 shadow-glow">
+                <BarChart3 className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Analytics Dashboard
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  Data-driven insights for your business
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold">Analytics Dashboard</h1>
-              <p className="text-sm text-muted-foreground">
-                Data-driven insights for your business
-              </p>
-            </div>
+            <ThemeToggle />
           </div>
         </div>
       </header>
