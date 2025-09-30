@@ -67,13 +67,17 @@ export const generateForecast = (data: DataRow[], sku: string, window: number = 
   // Add forecast for next periods
   const lastMA = movingAvg[movingAvg.length - 1];
   const lastDate = new Date(dates[dates.length - 1]);
-  for (let i = 1; i <= 7; i++) {
-    const nextDate = new Date(lastDate);
-    nextDate.setDate(nextDate.getDate() + i);
-    result.push({
-      date: nextDate.toISOString().split("T")[0],
-      forecast: lastMA,
-    });
+  
+  // Only add future forecast if lastDate is valid
+  if (!isNaN(lastDate.getTime())) {
+    for (let i = 1; i <= 7; i++) {
+      const nextDate = new Date(lastDate);
+      nextDate.setDate(nextDate.getDate() + i);
+      result.push({
+        date: nextDate.toISOString().split("T")[0],
+        forecast: lastMA,
+      });
+    }
   }
 
   return result;

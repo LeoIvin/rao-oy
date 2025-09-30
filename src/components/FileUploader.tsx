@@ -18,15 +18,24 @@ export const FileUploader = ({ onDataLoaded }: FileUploaderProps) => {
   const validateData = (rows: any[]): DataRow[] => {
     return rows
       .filter((row) => row.id && row.sku && row.name)
-      .map((row) => ({
-        id: String(row.id),
-        sku: String(row.sku),
-        name: String(row.name),
-        quantity: Number(row.quantity) || 0,
-        price: Number(row.price) || 0,
-        created: row.created || new Date().toISOString().split("T")[0],
-        total: Number(row.total) || 0,
-      }));
+      .map((row) => {
+        let validDate = new Date().toISOString().split("T")[0];
+        if (row.created) {
+          const parsedDate = new Date(row.created);
+          if (!isNaN(parsedDate.getTime())) {
+            validDate = parsedDate.toISOString().split("T")[0];
+          }
+        }
+        return {
+          id: String(row.id),
+          sku: String(row.sku),
+          name: String(row.name),
+          quantity: Number(row.quantity) || 0,
+          price: Number(row.price) || 0,
+          created: validDate,
+          total: Number(row.total) || 0,
+        };
+      });
   };
 
   const handleFile = (file: File) => {
