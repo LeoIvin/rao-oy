@@ -26,14 +26,21 @@ export const FileUploader = ({ onDataLoaded }: FileUploaderProps) => {
             validDate = parsedDate.toISOString().split("T")[0];
           }
         }
+        
+        const price = Number(row.price) || 0;
+        const costPrice = Number(row["cost price"] || row.costPrice || price / 1.5);
+        const profit = Number(row.profit || price - costPrice);
+        
         return {
           id: String(row.id),
           sku: String(row.sku),
           name: String(row.name),
           quantity: Number(row.quantity) || 0,
-          price: Number(row.price) || 0,
+          price,
+          costPrice,
+          profit,
           created: validDate,
-          total: Number(row.total) || 0,
+          total: Number(row["total revenue"] || row.total || Number(row.quantity) * price),
         };
       });
   };

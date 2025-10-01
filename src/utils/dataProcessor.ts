@@ -6,11 +6,15 @@ export const calculateProfitability = (data: DataRow[]): ProfitabilityData[] => 
       acc[row.sku] = {
         sku: row.sku,
         totalRevenue: 0,
+        totalProfit: 0,
+        totalCost: 0,
         totalQuantity: 0,
         prices: [],
       };
     }
     acc[row.sku].totalRevenue += row.total;
+    acc[row.sku].totalProfit += row.profit * row.quantity;
+    acc[row.sku].totalCost += row.costPrice * row.quantity;
     acc[row.sku].totalQuantity += row.quantity;
     acc[row.sku].prices.push(row.price);
     return acc;
@@ -19,8 +23,11 @@ export const calculateProfitability = (data: DataRow[]): ProfitabilityData[] => 
   return Object.values(grouped).map((item: any) => ({
     sku: item.sku,
     totalRevenue: item.totalRevenue,
+    totalProfit: item.totalProfit,
+    totalCost: item.totalCost,
     totalQuantity: item.totalQuantity,
     avgPrice: item.prices.reduce((a: number, b: number) => a + b, 0) / item.prices.length,
+    profitMargin: item.totalRevenue > 0 ? (item.totalProfit / item.totalRevenue) * 100 : 0,
   }));
 };
 

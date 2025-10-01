@@ -4,6 +4,8 @@ export interface DataRow {
   name: string;
   quantity: number;
   price: number;
+  costPrice: number;
+  profit: number;
   created: string;
   total: number;
 }
@@ -11,8 +13,11 @@ export interface DataRow {
 export interface ProfitabilityData {
   sku: string;
   totalRevenue: number;
+  totalProfit: number;
+  totalCost: number;
   totalQuantity: number;
   avgPrice: number;
+  profitMargin: number;
 }
 
 export interface KPIMetrics {
